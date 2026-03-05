@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React Todo List</title>
+
+  <style>
+    .container {
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+    }
+
+    .container div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      width: 100%;
+    }
+
+    .container div input,
+    .container div button {
+      font-size: 1.1em;
+    }
+
+    .list {
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+      padding: 0;
+      text-align: center;
+    }
+
+    .list li {
+      width: 50%;
+      padding: 0.5em;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid grey;
+    }
+
+    .list li span {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.25em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.1/babel.min.js"></script>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    function Todolist() {
+    //State
+      var [list, setList] = React.useState([]);
+      let listTitle = "";
+    //Actions
+      function addTodo() {
+        setList([...list, listTitle]);
+      }
+
+      function removeTodo(index) {
+        list.splice(index, 1);
+        setList([...list]);
+      }
+    //Ui
+      return (
+        <div className="container">
+
+          <h1>React Todo List</h1>
+
+          <div>
+            <input
+              type="text"
+              placeholder="Enter task..."
+              onKeyUp={(event) => {
+                listTitle = event.target.value;
+              }}
+            />
+
+            <button onClick={addTodo}>
+              Add Task
+            </button>
+          </div>
+
+          <ul className="list" type="none">
+
+            <h3 style={{ margin: "0px" }}>Tasks</h3>
+
+            {list.map((todo, index) => (
+              <li key={index}>
+
+                <span>{todo}</span>
+
+                <button onClick={() => removeTodo(index)}>
+                  Done
+                </button>
+
+              </li>
+            ))}
+
+          </ul>
+
+        </div>
+      );
+    }
+
+    ReactDOM.render(
+      <Todolist />,
+      document.getElementById("root")
+    );
+
+  </script>
+
+</body>
+
+</html>
