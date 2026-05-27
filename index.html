@@ -62,12 +62,13 @@
   <div id="root"></div>
 
   <script type="text/babel">
+    console.log("PR Request");
 
     function Todolist() {
-    //State
+      //State
       var [list, setList] = React.useState([]);
       let listTitle = "";
-    //Actions
+      //Actions
       function addTodo() {
         setList([...list, listTitle]);
       }
@@ -76,7 +77,7 @@
         list.splice(index, 1);
         setList([...list]);
       }
-    //Ui
+      //Ui
       return (
         <div className="container">
 
